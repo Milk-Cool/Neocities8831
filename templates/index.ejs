@@ -22,7 +22,7 @@
             <% buttons.forEach(button => { %>
                 <div class="button">
                     <% if(button.url) { %><a href="<%= button.url %>" target="_blank"><% } %>
-                    <img src="/imgs/<%= button.filename %>">
+                    <img src="/imgs/<%= button.filename %>" class="button-img">
                     <% if(button.url) { %></a><% } %>
                     <br>
                     <a href="/info/<%= button.id %>" class="info">info</a>
