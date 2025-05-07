@@ -1,4 +1,4 @@
-import { getButton, iteration, paginatedButtons, randomButtons } from "./index.js";
+import { buttonCount, getButton, iteration, paginatedButtons, randomButtons } from "./index.js";
 import { readFileSync } from "fs";
 import express from "express";
 import { resolve, join } from "path";
@@ -21,7 +21,8 @@ app.get("/", async (req, res) => {
     res.send(renderEjs("index.ejs", {
         buttons: req.query.page ? await paginatedButtons(perPage, parseInt(req.query.page) * perPage) : await randomButtons(),
         page: req.query.page ? parseInt(req.query.page) : 0,
-        perPage
+        perPage,
+        count: await buttonCount()
     }));
 });
 app.get("/info/:id", async (req, res) => {
