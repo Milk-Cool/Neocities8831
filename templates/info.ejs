@@ -7,9 +7,10 @@
         <script src="/date.js" defer></script>
     </head>
     <body>
+        <%- include("titlebar.ejs"); %>
         <div id="main">
-            <a href="/">Back</a>
             <h1>Button #<%= button.id %></h1>
+            <a href="/"><button>Back</button></a><br><br>
             <img width="440" height="155" src="/imgs/<%= button.filename %>" class="big"><br>
             <p>Source: <a href="<%= button.img %>"><%= button.img %></a></p>
             <p>Links to: <a href="<%= button.url %>"><%= button.url %></a></p>

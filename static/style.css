@@ -20,3 +20,13 @@ code {
     width: 88px;
     height: 31px;
 }
+h1 {
+    font-size: xx-large !important;
+}
+h3 {
+    font-size: large !important;
+}
+body {
+    margin: 0;
+    background: #c0c0c0;
+}
