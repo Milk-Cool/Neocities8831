@@ -52,6 +52,10 @@ export const addLink = async url => {
     await adb.run(`INSERT INTO links (date, url) VALUES (?, ?)`, [Date.now(), url]);
 };
 
+export const websiteCount = async () => {
+    return (await adb.get(`SELECT COUNT(*) FROM links`))["COUNT(*)"];
+};
+
 export const buttonCount = async () => {
     return (await adb.get(`SELECT COUNT(*) FROM buttons`))["COUNT(*)"];
 };
@@ -66,6 +70,10 @@ export const getButton = async id => {
 
 export const randomButtons = async () => {
     return await adb.all(`SELECT * FROM buttons ORDER BY random() LIMIT 300`);
+};
+
+export const search = async query => {
+    return await adb.all(`SELECT * FROM buttons WHERE instr(lower(img), lower(?)) OR instr(lower(url), lower(?)) LIMIT 1000`, [query, query]);
 };
 
 export const paginatedButtons = async (limit, offset) => {

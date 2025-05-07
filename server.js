@@ -1,4 +1,4 @@
-import { buttonCount, getButton, iteration, paginatedButtons, randomButtons } from "./index.js";
+import { buttonCount, getButton, iteration, paginatedButtons, randomButtons, search, websiteCount } from "./index.js";
 import { readFileSync } from "fs";
 import express from "express";
 import { resolve, join } from "path";
@@ -19,10 +19,16 @@ app.get("/", async (req, res) => {
     const perPage = parseInt(req.query.per_page ?? 300);
     if(perPage > 1000) return res.status(400).send("too many per page!");
     res.send(renderEjs("index.ejs", {
-        buttons: req.query.page ? await paginatedButtons(perPage, parseInt(req.query.page) * perPage) : await randomButtons(),
+        buttons: req.query.q
+            ? await search(req.query.q)
+            : req.query.page
+            ? await paginatedButtons(perPage, parseInt(req.query.page) * perPage)
+            : await randomButtons(),
         page: req.query.page ? parseInt(req.query.page) : 0,
         perPage,
-        count: await buttonCount()
+        count: await buttonCount(),
+        websiteCount: await websiteCount(),
+        query: req.query.q ?? ""
     }));
 });
 app.get("/info/:id", async (req, res) => {

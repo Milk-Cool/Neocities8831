@@ -9,11 +9,15 @@
     <body>
         <div id="main">
             <h1><a href="/">Neocities8831</a></h1>
-            <h3>with <%= count %> buttons scanned so far!</h3>
+            <h3>with <%= count %> buttons from <%= websiteCount %> websites scanned so far!</h3>
             <button id="toggle">Toggle info</button>
             <form action="/" method="GET">
                 <label for="page">Page (from 0): </label><input name="page" id="page" value="<%= page %>">
                 <label for="per_page">Per page: </label><input name="per_page" id="per_page" value="<%= perPage %>">
+                <input type="submit">
+            </form>
+            <form action="/" method="GET">
+                <label for="q">Search: </label><input name="q" id="q" value="<%= query %>" required>
                 <input type="submit">
             </form>
             <p>These are found automatically at *.neocities.org and downloaded. <a href="https://github.com/Milk-Cool/Neocities8831/" target="_blank">GitHub</a></p>
