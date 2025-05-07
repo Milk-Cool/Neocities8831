@@ -15,6 +15,8 @@
             <p>Links to: <a href="<%= button.url %>"><%= button.url %></a></p>
             <p>Archived at: <date><%= new Date(button.date).toISOString() %></date></p>
             <p>SHA256: <%= Buffer.from(button.hash, "ascii").toString("hex") %></p>
+            <p>HTML: <code><%= `${button.url ? "<a href=\"" + button.url + "\">" : ""}<img src="${button.img}">${button.url ? "</a>" : ""}` %></code>
+            <br><i>Please check if hotlinking is allowed on the original website!</i></p>
         </div>
     </body>
 </html>
