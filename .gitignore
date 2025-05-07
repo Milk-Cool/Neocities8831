@@ -134,3 +134,10 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Package lock
+package-lock.json
+
+# Database and images
+imgs/
+data.db

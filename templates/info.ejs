@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Neocities8831 | Button #<%= button.id %></title>
+        <link href="/style.css" rel="stylesheet">
+        <script src="/date.js" defer></script>
+    </head>
+    <body>
+        <a href="/">Back</a>
+        <h1>Button #<%= button.id %></h1>
+
+        <div id="main">
+            <img width="440" height="155" src="/imgs/<%= button.filename %>" class="big"><br>
+            <p>Source: <a href="<%= button.img %>"><%= button.img %></a></p>
+            <p>Links to: <a href="<%= button.url %>"><%= button.url %></a></p>
+            <p>Archived at: <date><%= new Date(button.date).toISOString() %></date></p>
+            <p>SHA256: <%= Buffer.from(button.hash, "ascii").toString("hex") %></p>
+        </div>
+    </body>
+</html>

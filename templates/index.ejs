@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Neocities8831</title>
+        <link href="/style.css" rel="stylesheet">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <h1>300 random buttons</h1>
+        <button id="toggle">Toggle info</button>
+        <form action="/" method="GET">
+            <label for="page">Page (from 0): </label><input name="page" id="page" value="<%= page %>">
+            <label for="per_page">Per page: </label><input name="per_page" id="per_page" value="<%= perPage %>">
+            <input type="submit">
+        </form>
+        <div id="buttons">
+            <% buttons.forEach(button => { %>
+                <div class="button">
+                    <% if(button.url) { %><a href="<%= button.url %>" target="_blank"><% } %>
+                    <img src="/imgs/<%= button.filename %>">
+                    <% if(button.url) { %></a><% } %>
+                    <br>
+                    <a href="/info/<%= button.id %>" class="info">info</a>
+                </div>
+            <% }); %>
+        </div>
+    </body>
+</html>

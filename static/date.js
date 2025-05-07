@@ -1,0 +1,1 @@
+document.querySelectorAll("date").forEach(el => el.innerText = new Date(el.innerText).toLocaleString());

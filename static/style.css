@@ -1,0 +1,15 @@
+#buttons, #main {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50em;
+}
+#buttons > .button {
+    display: inline-block;
+}
+#buttons.noinfo > .button > .info {
+    display: none;
+}
+.big {
+    image-rendering: pixelated;
+}
