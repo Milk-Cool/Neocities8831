@@ -30,7 +30,9 @@ app.get("/info/:id", async (req, res) => {
     if(!button) return res.status(404).send("Not found");
     res.send(renderEjs("info.ejs", { button }));
 });
-app.use("/imgs", express.static("imgs"));
+app.use("/imgs", express.static("imgs", {
+    setHeaders: res => res.set("cache-control", "immutable,max-age=86400")
+}));
 app.use(express.static("static"));
 
 app.listen(8831);
