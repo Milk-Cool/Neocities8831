@@ -10,7 +10,7 @@
 #buttons.noinfo > .button > .info {
     display: none;
 }
-.big {
+.big, .button-img {
     image-rendering: pixelated;
 }
 code {
