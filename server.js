@@ -44,5 +44,5 @@ app.use(express.static("static"));
 app.listen(8831);
 
 (async () => {
-    while(true) await iteration();
+    while(true) await iteration(!!process.env.USE_LATEST);
 })();

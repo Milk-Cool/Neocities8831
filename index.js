@@ -36,8 +36,9 @@ adb.all = (query, params) => adb("all", query, params);
 adb.run = (query, params) => adb("run", query, params);
 
 const URL_RANDOM = `https://neocities.org/browse?sort_by=random`;
-export const getRandom = async () => {
-    const randomText = await (await fetch(URL_RANDOM)).text();
+const URL_LATEST = `https://neocities.org/browse?sort_by=last_updated&tag=`;
+export const getRandom = async (latest = false) => {
+    const randomText = await (await fetch(latest ? URL_LATEST : URL_RANDOM)).text();
     const dom = new JSDOM(randomText, { contentType: "text/html" });
     const { document } = dom.window;
     const websites = Array.from(document.querySelectorAll(".website-Gallery .title a")).map(el => el.href);
@@ -92,10 +93,10 @@ export const addButton = async (buf, ext, url, link, hash) => {
 
 export const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-export const iteration = async () => {
+export const iteration = async (latest = false) => {
     let urls;
     try {
-        urls = await getRandom();
+        urls = await getRandom(latest);
     } catch(_) {
         console.log("Connection might be unstable!");
         await wait(1000);
