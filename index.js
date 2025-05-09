@@ -93,24 +93,24 @@ export const addButton = async (buf, ext, url, link, hash) => {
 
 export const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-export const iteration = async (latest = false) => {
+export const iteration = async (latest = false, depth = 1) => {
+    /** @type {import("spider8831").Spider8831Link[]} */
     let urls;
     try {
-        urls = await getRandom(latest);
+        urls = (await getRandom(latest)).map(x => ({ url: x, depth: 0 }));
     } catch(_) {
         console.log("Connection might be unstable!");
         await wait(1000);
         return;
     }
-    const spider = new Spider8831({
-        depth: 1
-    });
-    for(const url of urls) {
+    const spider = new Spider8831({ depth });
+    while(urls.length > 0) {
+        const url = urls[0];
         try {
-            const origin = new URL(url).origin;
+            const origin = new URL(url.url).origin;
             if(await hasLink(origin)) continue;
-            console.log(url);
-            const res = await spider.scan(url);
+            console.log(url.url);
+            const res = await spider.scan(url.url);
             for(const img of res.imgs) {
                 if(!Spider8831.imgURL(img.url)) continue;
                 const hash = hashImg(img.img);
@@ -120,6 +120,9 @@ export const iteration = async (latest = false) => {
                 const ext = ind === -1 ? path : path.slice(ind);
                 await addButton(img.img, ext, img.url, img.link, hash);
                 console.log(img.url);
+            }
+            for(const next of res.next) {
+                urls.push(next);
             }
             await addLink(origin);
         } catch(e) {
