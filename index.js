@@ -11,6 +11,8 @@ const db = new sqlite3.Database("data.db");
 if(!existsSync(DIR_NAME))
     mkdirSync(DIR_NAME);
 
+const TIMEOUT = 30000;
+
 db.run(`CREATE TABLE IF NOT EXISTS buttons (
     id INTEGER PRIMARY KEY,
     date INTEGER,
@@ -103,7 +105,7 @@ export const iteration = async (latest = false, depth = 1) => {
         await wait(1000);
         return;
     }
-    const spider = new Spider8831({ depth });
+    const spider = new Spider8831({ depth, timeout: TIMEOUT });
     while(urls.length > 0) {
         const url = urls[0];
         try {
